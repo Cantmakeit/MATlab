@@ -7,13 +7,13 @@ n = input("Enter the number of variables : ");
 A = input("Enter the augmented matrix : ")
 
    for i=1:n;
-     maxx = A(i,i);
+     maxx = abs(A(i,i));
    max_index=i;
 
 for p=i:n;
 
-       if A(p,i)> maxx;
-         maxx= A(p,i);
+       if abs(A(p,i))> maxx;
+         maxx= abs(A(p,i));
          max_index=p;
        end
      end
@@ -43,5 +43,3 @@ for p=i:n;
 % [27 6 -1 85;6 15 2 72; 1 1 54 110]
 % [2 6 -1 -12;5 -1 1 11; 4 -1 3 10]
 x
-
-

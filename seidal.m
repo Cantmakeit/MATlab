@@ -1,6 +1,6 @@
 clc
 clearvars
-disp("gauss seidal method")
+disp("seidal method")
 n = input("Enter the number of variables : ");
 A = input("Enter the augmented matrix : ")
 
@@ -21,18 +21,6 @@ end
 tol=0.00001;
 no_of_itr=1000;
 x(1:n)=0;
-old(1:n)=0;
-
-for j=1:n;
-      summ=0;
-       for k=1:n;
-           if k~=j;
-              summ=summ+A(j,k)*x(k);
-           end
-       end
-       old(j)=(A(j,n+1)-summ)/A(j,j);
-end
-
 if flag==0
 
 
@@ -41,15 +29,15 @@ if flag==0
             summ=0;
             for k=1:n;
                 if k~=j;
-                    summ=summ+A(j,k)*old(k);
+                    summ=summ+A(j,k)*x(k);
                 end
             end
 
-            x(j)=(A(j,n+1)-summ)/A(j,j);
-            er=(abs(x(j)-old(j))/x(j));
+            temp=(A(j,n+1)-summ)/A(j,j);
+            er=(abs(x(j)-temp)/temp);
 
             if er>tol;
-                old(j)=x(j);
+                x(j)=temp;
             end
         end
     end
@@ -62,6 +50,12 @@ if flag == 1;
  else
   x
   end
+
+
+
+
+
+
 
 
 

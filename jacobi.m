@@ -1,6 +1,6 @@
 clc
 clearvars
-disp("gauss seidal method")
+disp("jacobi method")
 n = input("Enter the number of variables : ");
 A = input("Enter the augmented matrix : ")
 
@@ -21,6 +21,18 @@ end
 tol=0.00001;
 no_of_itr=1000;
 x(1:n)=0;
+old(1:n)=0;
+
+for j=1:n;
+      summ=0;
+       for k=1:n;
+           if k~=j;
+              summ=summ+A(j,k)*x(k);
+           end
+       end
+       old(j)=(A(j,n+1)-summ)/A(j,j);
+end
+
 if flag==0
 
 
@@ -29,15 +41,15 @@ if flag==0
             summ=0;
             for k=1:n;
                 if k~=j;
-                    summ=summ+A(j,k)*x(k);
+                    summ=summ+A(j,k)*old(k);
                 end
             end
 
-            temp=(A(j,n+1)-summ)/A(j,j);
-            er=(abs(x(j)-temp)/temp);
+            x(j)=(A(j,n+1)-summ)/A(j,j);
+            er=(abs(x(j)-old(j))/x(j));
 
             if er>tol;
-                x(j)=temp;
+                old(j)=x(j);
             end
         end
     end
@@ -50,12 +62,6 @@ if flag == 1;
  else
   x
   end
-
-
-
-
-
-
 
 
 

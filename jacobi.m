@@ -19,7 +19,7 @@ for i=1:n;
             break;
         end
 end
-tol=0.00001;
+
 no_of_itr=1000;
 x(1:n)=0;
 old(1:n)=0;

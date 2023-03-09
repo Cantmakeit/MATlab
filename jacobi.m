@@ -1,3 +1,4 @@
+
 clc
 clearvars
 disp("jacobi method")
@@ -46,14 +47,9 @@ if flag==0
             end
 
             x(j)=(A(j,n+1)-summ)/A(j,j);
-            er=(abs(x(j)-old(j))/x(j));
-
-            if er>tol;
-                old(j)=x(j);
-            end
         end
+        old=x;
     end
-
 end
 
 if flag == 1;

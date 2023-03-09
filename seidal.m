@@ -32,14 +32,8 @@ if flag==0
                     summ=summ+A(j,k)*x(k);
                 end
             end
-            temp=x(j);
-
+        
             x(j)=(A(j,n+1)-summ)/A(j,j);
-            er=(abs(x(j)-temp)/temp);
-
-            if er>tol;
-                x(j)=temp;
-            end
         end
     end
 

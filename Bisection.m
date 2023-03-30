@@ -16,8 +16,8 @@ end
 % finding root using bisection method
 while abs(b - a) > tol
     mid = (a + b) / 2;
-    if f(mid) == 0
-        root = mid;
+    if abs(b-mid)<=tol || abs(a-mid)<=tol
+        root = mid
         break;
     elseif f(mid) * f(a) < 0
         b = mid;
@@ -25,7 +25,6 @@ while abs(b - a) > tol
         a = mid;
     end
 end
-root = (a + b) / 2;
 % displaying root
 fprintf('The root of the equation: ');
-disp(root)
+root

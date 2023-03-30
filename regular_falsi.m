@@ -6,7 +6,16 @@ f = @(x) (4*exp(-x)*sin(x)-1);          % Function whose roots are desired
 a = input('Enter the LS interval: '); % input interval 
 b = input('Enter the RS interval: '); % input interval
 Tol = input('Enter the tolerance: '); % tolerance
-c = 0;                                  % Counter for the no. of iterations
+c = 0;   % Counter for the no. of iterations
+
+while f(a) * f(b) > 0 
+    fprintf('There is no root within this interval\n')
+    fprintf('Rewrite')
+    a = input('Enter the LS interval: '); % input interval 
+    b = input('Enter the RS interval: '); % input interval
+end
+
+
 for i=1:100
     c = c + 1;
     xm = (a*f(b)- b*f(a))/(f(b)-f(a));
@@ -24,3 +33,14 @@ for i=1:100
     end
 end
 fprintf ('The root is: %.6f \n', xm);
+
+x = linspace(0, 1, 1000);
+y =  (4*exp(-x).*sin(x)-1);
+plot(x, y);
+hold on;
+plot(xm, f(xm), 'r*', 'MarkerSize', 10);
+grid on
+xlabel('x');
+ylabel('f(x)');
+title('Regula Falsi Method');
+legend('f(x)', 'Root');

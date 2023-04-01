@@ -2,44 +2,44 @@ clc
 clearvars
 
 %f = @(x) x * exp(x) - 1;
-f = @(x) (4*exp(-x)*sin(x)-1);          % Function whose roots are desired
-a = input('Enter the LS interval: '); % input interval 
-b = input('Enter the RS interval: '); % input interval
-Tol = input('Enter the tolerance: '); % tolerance
-c = 0;   % Counter for the no. of iterations
+f = @(x) (4*exp(-x).*sin(x)-1);  
+ezplot(f , [-.5 1])
+grid on
+a = input('Enter the LS interval: ');  
+b = input('Enter the RS interval: '); 
+Tol = input('Enter the tolerance: ');
+c = 0;   
 
 while f(a) * f(b) > 0 
     fprintf('There is no root within this interval\n')
     fprintf('Rewrite')
-    a = input('Enter the LS interval: '); % input interval 
-    b = input('Enter the RS interval: '); % input interval
+    a = input('Enter the LS interval: ');
+    b = input('Enter the RS interval: '); 
 end
 
 
-for i=1:100
+for i=1:10000
     c = c + 1;
     xm = (a*f(b)- b*f(a))/(f(b)-f(a));
-    fm = f(xm);                         % Evaluate the function at x = xm
-    
- % Print the intermediate results
+    fm = f(xm); 
+    hold on
+    pause(3)
+    plot(double(xm),double(subs(f,xm)),'ko')
+
  fprintf('Iteration: %d\t',c);
  fprintf ('[a,b,xm] = [%.6f, %.6f, %.6f]\n', a,b,xm);
  if abs(b-xm)<=Tol || abs(a-xm)<=Tol
      break;
- elseif f(a)*fm < 0                      % If the root is on the left,
-        b = xm ;                        % then set xm as the new b.
-    elseif fm * f(b) < 0                % But if the root is on the right,
+ elseif f(a)*fm < 0                 
+        b = xm ;           
+    elseif fm * f(b) < 0   
         a = xm ;
     end
 end
 fprintf ('The root is: %.6f \n', xm);
+hold on
+  plot(double(xm),double(subs(f,xm)),'r*')
 
-x = linspace(0, 1, 1000);
-y =  (4*exp(-x).*sin(x)-1);
-plot(x, y);
-hold on;
-plot(xm, f(xm), 'r*', 'MarkerSize', 10);
-grid on
 xlabel('x');
 ylabel('f(x)');
 title('Regula Falsi Method');

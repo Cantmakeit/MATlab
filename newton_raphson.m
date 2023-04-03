@@ -1,7 +1,7 @@
 clc
 syms x
 f= x*log10(x)-4.77;
-g= diff(f)
+g= diff(f);
 
 x0=input('Enter the initial guess:');
 e=input('Enter the tolerance:');
@@ -14,3 +14,7 @@ for i=1:n
     end    
     x0=x1;
 end    
+ezplot(f)
+grid on
+hold on
+  plot(double(x1),double(subs(f,x1)),'r*')

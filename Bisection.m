@@ -1,7 +1,9 @@
 clc
 clearvars
 
-f = @(x) x * exp(x) - 1; % define function
+f = @(x) x .* exp(x) - 1; % define function
+ezplot(f , [-.5 1])
+grid on
 a = input('Enter the LS interval: '); % input interval 
 b = input('Enter the RS interval: '); % input interval
 tol = input('Enter the tolerance: '); % tolerance
@@ -16,6 +18,9 @@ end
 % finding root using bisection method
 while abs(b - a) > tol
     mid = (a + b) / 2;
+       hold on
+    pause(3)
+    plot(double(mid),double(subs(f,mid)),'ko')
     if abs(b-mid)<=tol || abs(a-mid)<=tol
         root = mid
         break;
@@ -28,3 +33,11 @@ end
 % displaying root
 fprintf('The root of the equation: ');
 root
+
+hold on
+  plot(double(root),double(subs(f,root)),'r*')
+
+xlabel('x');
+ylabel('f(x)');
+title('bisection');
+legend('f(x)', 'Root');
